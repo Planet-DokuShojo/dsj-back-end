@@ -35,7 +35,7 @@ https://track.toggl.com/timer
 Figma :
 https://www.figma.com/design/50opLIEQ9GiWI8JpFw4a9g/Untitled?node-id=1-1350&t=DATzOSzYapvJvaj3-1
 
-DB Designer:
+DB Designer: https://dbdesigner.page.link/onxC7687ViHzGVk76
 
 Notion:
 https://www.notion.so/Projects-Tasks-124868ad8b784d78b6a46c5d70248b95
