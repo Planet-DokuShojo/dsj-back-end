@@ -3,13 +3,10 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return (
-    knex.schema,
-    createTable("user_list", function (table) {
-      table.increments("user_id").primary().notNullable().onDelete("CASCADE");
-      table.string("email_address", 255).unique().notNullable();
-    })
-  );
+  return knex.schema.createTable("user_list", function (table) {
+    table.increments("user_id").primary().notNullable();
+    table.string("email_address", 255).unique().notNullable();
+  });
 };
 
 /**

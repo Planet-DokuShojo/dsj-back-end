@@ -8,9 +8,10 @@
     "build": "npx tsc",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "migrate:make": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
-    "migrate:latest": "knex --knexfile src/database/knexfile.ts migrate:latest",
-    "migrate:rollback": "knex --knexfile src/database/knexfile.ts migrate:rollback"
+    "migrate:make": "knex --knexfile ./knexfile.ts -x ts migrate:make",
+    "migrate:latest": "knex --knexfile ./knexfile.ts migrate:latest",
+    "migrate:rollback": "knex --knexfile ./knexfile.ts migrate:rollback",
+    "seed-data": "knex seed:run --knexfile ./knexfile.ts"
   },
   "keywords": [],
   "author": "",
