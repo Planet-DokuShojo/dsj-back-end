@@ -30,6 +30,7 @@ export const createFlashcard = (req: Request, res: Response) => {
     .catch(error => res.status(500).json({error: 'error create new Flashcard'}));
 }
 
+
 //UPDATE FLASHCARD
 export  const updateFlashcard = (req: Request, res: Response) => {
     const { id } = req.params;
@@ -46,6 +47,7 @@ export  const updateFlashcard = (req: Request, res: Response) => {
     .catch(error => res.status(500).json({error: 'Error update FlashCard'}));
 }
 
+
 // DELETE FLASHCARD
 export const deleteFlashcard = (req: Request, res: Response) => {
     const { id } = req.params;
@@ -60,3 +62,18 @@ export const deleteFlashcard = (req: Request, res: Response) => {
     .catch(error => res.status(500).json({error: 'Error while deleting FlashCard'}));
 }
 
+
+
+//GET ALL CARDS FROM DECK_ID
+export const getByDeckId = (req: Request, res: Response) => {
+    const { id }  = req.params;
+    knex('card_deck').where({ deck_id:id })
+    .then(flashCards =>  {
+        if(flashCards.length > 0) {
+            res.json(flashCards);
+        } else {
+            res.status(404).json({error:'No cards found for this deck'});  
+        }
+    })
+    .catch(error => res.status(500).json({error: 'error occured'}));
+}

@@ -60,4 +60,17 @@ export const deleteDeck = (req: Request, res: Response) => {
     .catch(error => res.status(500).json({error: 'Error while deleting Deck'}));
 }
 
+// GET DECKS FROM USER_ID
+export const getByUserId = (req: Request, res: Response) => {
+    const { id }  = req.params;
+    knex('deck_list').where({ user_id:id })
+    .then(decks =>  {
+        if(decks.length > 0) {
+            res.json(decks);
+        } else {
+            res.status(404).json({error:'No decks found for this user'});  
+        }
+    })
+    .catch(error => res.status(500).json({error: 'error occured'}));
+}
 
