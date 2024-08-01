@@ -103,6 +103,13 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
+    "skipLibCheck": true,                                /* Skip type checking all .d.ts files. */
+    "rootDirs": ["."],
+    "lib": ["es6", "dom"],
+    "baseUrl": "./",
+  }, 
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"],
+  "typeRoots": ["./node_modules/@types"],
+  "types": ["node", "knex"]
 }

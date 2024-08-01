@@ -1,13 +1,14 @@
-import { Pool } from 'pg';
+import { Pool } from "pg";
+require("dotenv").config({ path: "./.env.local" });
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'dokushojo_db', 
-  password: 'your_password', // Replace 'your_password' with the password for your PostgreSQL user
-  port: 5432, 
+  user: process.env.DB_USER,
+  host: "127.0.0.1",
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: 5432,
 });
 
 module.exports = {
   query: (text: string, params: any[]) => pool.query(text, params),
-}
+};
