@@ -2,7 +2,7 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-require("dotenv").config({ path: "./.env" });
+require("dotenv").config({ path: "./.env.local" });
 
 import knex, { Knex } from "knex";
 
@@ -16,7 +16,7 @@ const knexConfig: KnexConfigMap = {
     connection: process.env.DATABASE_URL || {
       user: process.env.DB_USER,
       host: "127.0.0.1",
-      database: process.env.DB_NAME || "dokushojo_db",
+      database: process.env.DB_NAME,
       password: process.env.DB_PASSWORD,
       port: 5432,
     },
