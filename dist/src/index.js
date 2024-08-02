@@ -8,9 +8,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // src/index.js
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const router_1 = __importDefault(require("./Routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
+app.use(router_1);
 app.get("/", (req, res) => {
   res.send("Here we are, my friends.");
 });
