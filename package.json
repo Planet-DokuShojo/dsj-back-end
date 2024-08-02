@@ -2,7 +2,7 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "Welcome to the repository for the backend of the DokushoJo app. This project is designed to provide a restful API for managing flashcards with a serene and zen-like theme.",
-  "main": "./dist/src/index.js",
+  "main": "dist/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm install && npm run migrate:latest && npm run seed-data",
