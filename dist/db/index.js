@@ -7,7 +7,7 @@ const pool = new pg_1.Pool({
   host: "127.0.0.1",
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  port: 5432,
+  port: 3000,
 });
 module.exports = {
   query: (text, params) => pool.query(text, params),
