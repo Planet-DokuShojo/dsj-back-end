@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const pg_1 = require("pg");
+require("dotenv").config({ path: "./.env.local" });
 const pool = new pg_1.Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'dokushojo_db',
-    password: 'your_password', // Replace 'your_password' with the password for your PostgreSQL user
+    user: process.env.DB_USER,
+    host: "127.0.0.1",
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
     port: 5432,
 });
 module.exports = {
