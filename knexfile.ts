@@ -16,7 +16,7 @@ const knexConfig: KnexConfigMap = {
     connection: process.env.DATABASE_URL || {
       user: process.env.DB_USER,
       host: "127.0.0.1",
-      database: process.env.DB_NAME,
+      database: process.env.DB_NAME || "dokushojo_db",
       password: process.env.DB_PASSWORD,
       port: 5432,
     },
