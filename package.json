@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm install && npm run migrate:latest && npm run seed-data",
-    "start": "ts-node src/index.ts",
+    "start": "node ./dist/db/index.js",
     "dev": "nodemon src/index.ts",
     "migrate:make": "knex --knexfile ./knexfile.ts -x ts migrate:make",
     "migrate:latest": "knex --knexfile ./knexfile.ts migrate:latest",
@@ -32,4 +32,3 @@
     "typescript": "^5.5.4"
   }
 }
-
