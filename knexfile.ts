@@ -11,7 +11,7 @@ interface KnexConfigMap {
   [key: string]: object;
 }
 
-const knexConfig: KnexConfigMap = {
+export const knexConfig: KnexConfigMap = {
   development: {
     client: 'pg',
     connection: process.env.DATABASE_URL || {
@@ -32,4 +32,4 @@ const knexConfig: KnexConfigMap = {
   },
 };
 
-module.exports = knexConfig;
+
