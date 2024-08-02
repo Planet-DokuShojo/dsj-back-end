@@ -1,14 +1,11 @@
-// Update with your config settings.
-/**
- * @type { Object.<string, import("knex").Knex.Config> }
- */
+import type { Knex } from 'knex'
 import dotenv from "dotenv"
 dotenv.config({path: "./.env.local"})
 
-const knexConfig = {
+const knexConfig: {[key:string]: Knex.Config } = {
   development: {
     client: 'pg',
-    connection: {
+    connection: process.env.DATABASE_URL || {
       host: "127.0.0.1" || 'localhost',
       user: process.env.DB_USER,
       database: process.env.DB_NAME,
@@ -39,4 +36,4 @@ const knexConfig = {
   },
 };
 
-module.exports = knexConfig
+export default knexConfig
