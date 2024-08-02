@@ -5,7 +5,7 @@
   "main": "dist/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && npm run migrate:latest && npm run seed-data",
+    "build": "npm install && npm run migrate:latest && npm run seed-data",
     "start": "node ./dist/src/index.js",
     "dev": "nodemon src/index.ts",
     "migrate:make": "knex --knexfile ./knexfile.ts -x ts migrate:make",
