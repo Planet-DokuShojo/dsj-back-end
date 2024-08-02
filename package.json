@@ -1,12 +1,12 @@
 {
-  "name": "back-end",
+  "name": "node",
   "version": "1.0.0",
   "description": "Welcome to the repository for the backend of the DokushoJo app. This project is designed to provide a restful API for managing flashcards with a serene and zen-like theme.",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tsc",
-    "start": "node dist/index.js",
+    "build": "npm install && npm run migrate:latest",
+    "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
     "migrate:make": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
     "migrate:latest": "knex --knexfile src/database/knexfile.ts migrate:latest",
