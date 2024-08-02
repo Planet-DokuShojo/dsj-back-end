@@ -5,10 +5,7 @@
 import dotenv from "dotenv"
 dotenv.config({path: "./.env.local"})
 
-import { Knex } from "knex";
-
-
-export const knexConfig: { [key: string]: Knex.Config} = {
+const knexConfig = {
   development: {
     client: 'pg',
     connection: {
@@ -42,4 +39,4 @@ export const knexConfig: { [key: string]: Knex.Config} = {
   },
 };
 
-
+module.exports = knexConfig

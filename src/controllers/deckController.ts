@@ -1,5 +1,13 @@
-import knex from '../knex';
+const knex = require("knex")
 import type { Request, Response } from "express";
+
+interface Deck {
+deck_id: number,
+user_id: number,
+deck_title: string,
+created_at: Date,
+updated_at: Date
+}
 
 
 //GET ALL

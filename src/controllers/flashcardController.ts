@@ -1,4 +1,4 @@
-import knex from '../knex';
+const knex = require("knex")
 import type { Request, Response } from "express";
 
 
