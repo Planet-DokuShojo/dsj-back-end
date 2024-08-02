@@ -1,4 +1,4 @@
-import config from "../knexfile";
-import knex from "knex";
+import Knex from "knex";
+const config = require("../knexfile");
 
-export default knex(config);
+export const database = Knex(config);
