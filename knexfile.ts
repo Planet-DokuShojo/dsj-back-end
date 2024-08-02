@@ -3,7 +3,8 @@
  * @type { Object.<string, import("knex").Knex.Config> }
  */
 require("dotenv").config({ path: "./.env.local" });
-import knex, { Knex } from "knex";
+
+import knex, { Knex } from 'knex';
 
 interface KnexConfigMap {
   [key: string]: Knex.Config;
