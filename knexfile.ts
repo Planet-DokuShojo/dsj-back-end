@@ -7,21 +7,31 @@ dotenv.config({path: "./.env.local"})
 
 import { Knex } from "knex";
 
-interface KnexConfigMap {
-  [key: string]: object;
-}
 
-export const knexConfig: KnexConfigMap = {
+export const knexConfig: { [key: string]: Knex.Config} = {
   development: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || {
+    connection: {
       host: "127.0.0.1" || 'localhost',
       user: process.env.DB_USER,
       database: process.env.DB_NAME,
       password: process.env.DB_PASSWORD,
-      port: process.env.DB_PORT || 5432,
+      port: Number(process.env.DB_PORT) || 5432,
     },
     pool: {
+      min: 2,
+      max: 10,
+    },
+    migrations: {
+      tableName: "knex_migrations",
+      directory: "./migrations",
+    },
+  },
+
+  production: {
+    client: "pg",
+    connection: process.env.DATABASE_URL, 
+    pool:{
       min: 2,
       max: 10,
     },
