@@ -6,7 +6,7 @@ import * as flashcardController from "./controllers/flashcardController";
 const router = Router();
 
 // User routes
-router.get("", userController.getAllUsers);
+router.get("/", userController.getAllUsers);
 router.get("/users/:id", userController.getUserById);
 router.post("/users", userController.createUser);
 router.put("/users/:id", userController.updateUser);
