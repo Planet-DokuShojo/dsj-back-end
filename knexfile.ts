@@ -1,37 +1,39 @@
-// Update with your config settings.
-/**
- * @type { Object.<string, import("knex").Knex.Config> }
- */
-import { Knex } from "knex";
-import dotEnv from "dotenv";
+import type { Knex } from "knex";
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env.local" });
 
-dotEnv.config({ path: "./.env.local" });
-
-const DB_USER = process.env.DB_USER;
-const DB_PASSWORD = process.env.DB_PASSWORD;
-const DB_HOST = process.env.DB_HOST;
-const DB_PORT = process.env.DB_PORT;
-const DB_NAME = process.env.DB_NAME;
-const DB_URL = process.env.DATABASE_URL;
-
-const config: Knex.Config = {
-  client: "postgresql",
-  connection: DB_URL || {
-    host: DB_HOST,
-    port: Number(DB_PORT),
-    database: DB_NAME,
-    user: DB_USER,
-    password: DB_PASSWORD,
+const knexConfig: { [key: string]: Knex.Config } = {
+  development: {
+    client: "pg",
+    connection: process.env.DATABASE_URL || {
+      host: "127.0.0.1" || "localhost",
+      user: process.env.DB_USER,
+      database: process.env.DB_NAME,
+      password: process.env.DB_PASSWORD,
+      port: Number(process.env.DB_PORT) || 5432,
+    },
+    pool: {
+      min: 2,
+      max: 10,
+    },
+    migrations: {
+      tableName: "knex_migrations",
+      directory: "./migrations",
+    },
   },
-  useNullAsDefault: true,
-  pool: {
-    min: 2,
-    max: 10,
-  },
-  migrations: {
-    tableName: "knex_migrations",
-    directory: "./migrations",
+
+  production: {
+    client: "pg",
+    connection: process.env.DATABASE_URL,
+    pool: {
+      min: 2,
+      max: 10,
+    },
+    migrations: {
+      tableName: "knex_migrations",
+      directory: "./migrations",
+    },
   },
 };
 
-export default config;
+export default knexConfig;

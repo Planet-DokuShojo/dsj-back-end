@@ -1,10 +1,17 @@
-import knex from '../knex';
+import knex from "knex";
+import type {Knex}  from "knex";
 import type { Request, Response } from "express";
+
+import knexConfig from "../../knexfile";
+
+const environment: string = process.env.NODE_ENV || 'development';
+const config: Knex.Config = knexConfig[environment];
+const knexdb = knex(config);
 
 
 //GET ALL FLASHCARDS
 export const getAllFlashcards = (req: Request, res: Response) => {
-    knex('card_deck').select('*')
+    knexdb('card_deck').select('*')
     .then(allflashcard => res.json(allflashcard))
     .catch(error => res.status(500).json({error: 'error occured'}));
 } 
@@ -12,7 +19,7 @@ export const getAllFlashcards = (req: Request, res: Response) => {
 //GET FLASHCARDS BY ID
 export const getFlashcardById = (req: Request, res: Response) => {
     const { id }  = req.params;
-    knex('card_deck').where({ card_id: id }).first()
+    knexdb('card_deck').where({ card_id: id }).first()
     .then(flashCardID =>  {
         if(flashCardID) {
             res.json(flashCardID);
@@ -25,7 +32,7 @@ export const getFlashcardById = (req: Request, res: Response) => {
 
 //CREATE NEW FLASHCARD
 export const createFlashcard = (req: Request, res: Response) => {
-    knex('card_deck').insert(req.body).returning('*')
+    knexdb('card_deck').insert(req.body).returning('*')
     .then(newFlashcard =>   res.status(201).json(newFlashcard))
     .catch(error => res.status(500).json({error: 'error create new Flashcard'}));
 }
@@ -35,10 +42,10 @@ export const createFlashcard = (req: Request, res: Response) => {
 export  const updateFlashcard = (req: Request, res: Response) => {
     const { id } = req.params;
     const { deck_id, card_front, card_back} = req.body;
-    knex('card_deck').where({ card_id:id }).update({ deck_id, card_front, card_back })
+    knexdb('card_deck').where({ card_id:id }).update({ deck_id, card_front, card_back })
     .then(updatedFlashcard => {
         if(updatedFlashcard) {
-            return knex('card_deck').where({ card_id:id }).first();
+            return knexdb('card_deck').where({ card_id:id }).first();
         } else {
             res.status(404).json({ error: 'FlashCard not found' });
         }
@@ -51,7 +58,7 @@ export  const updateFlashcard = (req: Request, res: Response) => {
 // DELETE FLASHCARD
 export const deleteFlashcard = (req: Request, res: Response) => {
     const { id } = req.params;
-    knex('card_deck').where({ card_id:id }).del()
+    knexdb('card_deck').where({ card_id:id }).del()
     .then(deletedFlashCard => {
         if (deletedFlashCard) {
             res.status(200).json({ message: 'FlashCard deleted successfully' });
@@ -67,7 +74,7 @@ export const deleteFlashcard = (req: Request, res: Response) => {
 //GET ALL CARDS FROM DECK_ID
 export const getByDeckId = (req: Request, res: Response) => {
     const { id }  = req.params;
-    knex('card_deck').where({ deck_id:id })
+    knexdb('card_deck').where({ deck_id:id })
     .then(flashCards =>  {
         if(flashCards.length > 0) {
             res.json(flashCards);
