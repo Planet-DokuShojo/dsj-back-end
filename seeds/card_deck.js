@@ -7,20 +7,26 @@ exports.seed = async function (knex) {
   await knex("card_deck").del();
   await knex("card_deck").insert([
     {
-      card_front: "Text",
-      card_back: "こんにちは",
+      deck_id: 1,
+      card_id: 1,
+      card_front: "こんにちは",
+      card_back: "",
       created_at: new Date(),
       updated_at: new Date(),
     },
     {
-      card_front: "Text",
-      card_back: "東京医科大学病院",
+      deck_id: 1,
+      card_id: 2,
+      card_front: "東京医科大学病院",
+      card_back: "",
       created_at: new Date(),
       updated_at: new Date(),
     },
     {
-      card_front: "Text",
-      card_back: "西新宿",
+      deck_id: 1,
+      card_id: 3,
+      card_front: "西新宿",
+      card_back: "",
       created_at: new Date(),
       updated_at: new Date(),
     },

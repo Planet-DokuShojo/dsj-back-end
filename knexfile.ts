@@ -1,12 +1,12 @@
-import type { Knex } from 'knex'
-import dotenv from "dotenv"
-dotenv.config({path: "./.env.local"})
+import type { Knex } from "knex";
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env.local" });
 
-const knexConfig: {[key:string]: Knex.Config } = {
+const knexConfig: { [key: string]: Knex.Config } = {
   development: {
-    client: 'pg',
+    client: "pg",
     connection: process.env.DATABASE_URL || {
-      host: "127.0.0.1" || 'localhost',
+      host: "127.0.0.1" || "localhost",
       user: process.env.DB_USER,
       database: process.env.DB_NAME,
       password: process.env.DB_PASSWORD,
@@ -24,8 +24,8 @@ const knexConfig: {[key:string]: Knex.Config } = {
 
   production: {
     client: "pg",
-    connection: process.env.DATABASE_URL, 
-    pool:{
+    connection: process.env.DATABASE_URL,
+    pool: {
       min: 2,
       max: 10,
     },
@@ -36,4 +36,4 @@ const knexConfig: {[key:string]: Knex.Config } = {
   },
 };
 
-export default knexConfig
+export default knexConfig;
