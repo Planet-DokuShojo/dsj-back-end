@@ -46,10 +46,10 @@ export const createFlashcard = (req: Request, res: Response) => {
 //UPDATE FLASHCARD
 export const updateFlashcard = (req: Request, res: Response) => {
   const { id } = req.params;
-  const { deck_id, card_front, card_back } = req.body;
+  const { card_title, card_body, audio } = req.body;
   knexdb("card_deck")
     .where({ card_id: id })
-    .update({ deck_id, card_front, card_back })
+    .update({ card_title, card_body, audio })
     .then((updatedFlashcard) => {
       if (updatedFlashcard) {
         return knexdb("card_deck").where({ card_id: id }).first();
