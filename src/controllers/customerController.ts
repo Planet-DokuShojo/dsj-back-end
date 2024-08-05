@@ -32,7 +32,7 @@ export const createUser = (req: Request, res: Response) => {
   knex("customer")
     .insert(req.body)
     .returning("*")
-    .then((newUser) => res.status(201).json(newUser))
+    .then((newUser) => res.status(201).json(newUser[0]))
     .catch((error) =>
       res.status(500).json({ error: "error creating new User" })
     );

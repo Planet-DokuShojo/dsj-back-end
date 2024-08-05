@@ -1,16 +1,16 @@
 import { Router } from "express";
-import * as userController from "./controllers/userController";
+import * as customerController from "./controllers/customerController";
 import * as deckController from "./controllers/deckController";
 import * as flashcardController from "./controllers/cardController";
 
 const router = Router();
 
 // User routes
-router.get("/", userController.getAllUsers);
-router.get("/users/:id", userController.getUserById);
-router.post("/users", userController.createUser);
-router.put("/users/:id", userController.updateUser);
-router.delete("/users/:id", userController.deleteUser);
+router.get("/", customerController.getAllUsers);
+router.get("/customers/:id", customerController.getUserById);
+router.post("/customers", customerController.createUser);
+router.put("/customers/:id", customerController.updateUser);
+router.delete("/customers/:id", customerController.deleteUser);
 
 // Deck routes
 router.get("/decks", deckController.getAllDecks);
