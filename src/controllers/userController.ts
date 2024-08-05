@@ -1,13 +1,11 @@
 import knex from "knex";
 import type {Knex}  from "knex";
 import type { Request, Response } from "express";
+import User from "src/interfaces/User";
 
-const knexdb = require("../../knexfile");
+const knexdb: Knex = require("../../knexfile");
 
-interface User {
-    userId: number,
-    email: string
-}
+
 
 //GET ALL USERS
 export const getAllUsers = (req: Request, res: Response) => {

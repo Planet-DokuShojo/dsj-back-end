@@ -1,26 +1,14 @@
-import knex from "knex";
 import type {Knex}  from "knex";
 import type { Request, Response } from "express";
+import Deck from "../interfaces/Deck"
 
-import knexConfig from "../../knexfile";
+const knex: Knex = require("../../knexfile");
 
-const environment: string = process.env.NODE_ENV || 'development';
-const config: Knex.Config = knexConfig[environment];
-const knexdb = knex(config);
-
-
-interface Deck {
-deck_id: number,
-user_id: number,
-deck_title: string,
-created_at: Date,
-updated_at: Date
-}
 
 
 //GET ALL
 export const getAllDecks = (req: Request, res: Response) => {
-    knexdb<Deck>('deck_list').select('*')
+    knex<Deck>('deck').select('*')
     .then(allDecks => res.json(allDecks))
     .catch(error => res.status(500).json({error: 'error occured'}));
 } 
@@ -28,7 +16,7 @@ export const getAllDecks = (req: Request, res: Response) => {
 //GET BY ID
 export const getDeckById = (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
-    knexdb<Deck>('deck_list').where({ deck_id:id }).first()
+    knex<Deck>('deck').where({ id }).first()
     .then(decksID =>  {
         if(decksID) {
             res.json(decksID);
@@ -41,7 +29,7 @@ export const getDeckById = (req: Request, res: Response) => {
 
 //CREATE NEW DECK
 export const createDeck = (req: Request, res: Response) => {
-    knexdb<Deck>('deck_list').insert(req.body).returning('*')
+    knex<Deck>('deck').insert(req.body).returning('*')
     .then(newDecks =>   res.status(201).json(newDecks))
     .catch(error => res.status(500).json({error: 'error create new deck'}));
 }
@@ -49,11 +37,11 @@ export const createDeck = (req: Request, res: Response) => {
 //UPDATE DECKS
 export const updateDeck = (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
-    const { user_id, deck_title } = req.body;
-    knexdb<Deck>('deck_list').where({ deck_id:id }).update({ user_id, deck_title  })
+    const { title } = req.body;
+    knex<Deck>('deck').where({ id }).update({ title })
     .then(updatedDecks => {
         if(updatedDecks) {
-            return knexdb('deck_list').where({ deck_id:id }).first();
+            return knex('deck').where({ id:id }).first();
         } else {
             res.status(404).json({ error: 'Deck not found' });
         }
@@ -65,7 +53,7 @@ export const updateDeck = (req: Request, res: Response) => {
 // DELETE DECK
 export const deleteDeck = (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
-    knexdb<Deck>('deck_list').where({ deck_id:id }).del()
+    knex<Deck>('deck').where({ id }).del()
     .then(deletedDecks => {
         if (deletedDecks ) {
             res.status(200).json({ message: 'Deck deleted successfully' });
@@ -79,7 +67,7 @@ export const deleteDeck = (req: Request, res: Response) => {
 // GET DECKS FROM USER_ID
 export const getByUserId = (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
-    knexdb<Deck>('deck_list').where({ user_id:id })
+    knex<Deck>('deck').where({ user_id:id })
     .then(decks =>  {
         if(decks.length > 0) {
             res.json(decks);
