@@ -4,16 +4,15 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable("card", function (table) {
+    table.increments().primary().notNullable();
     table
       .integer("deck_id")
-      .references("deck_id")
-      .inTable("deck_list")
+      .references("id")
+      .inTable("deck")
       .onDelete("CASCADE");
-    table.increments("card_id").primary().notNullable();
-    table.string("card_title", 255).notNullable();
-    table.string("card_body", 255).notNullable();
-    table.dateTime("created_at").defaultTo(knex.fn.now());
-    table.dateTime("updated_at").defaultTo(knex.fn.now());
+    table.string("front", 255).notNullable();
+    table.string("back", 255).notNullable();
+    table.timestamps(true, true);
     table.string("audio_url", 400);
   });
 };
