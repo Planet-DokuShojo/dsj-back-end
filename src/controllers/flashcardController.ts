@@ -2,7 +2,7 @@ import knex from "knex";
 import type { Knex } from "knex";
 import type { Request, Response } from "express";
 
-import knexConfig from "../../knexfile";
+import knexConfig from "../knex";
 
 const environment: string = process.env.NODE_ENV || "development";
 const config: Knex.Config = knexConfig[environment];
