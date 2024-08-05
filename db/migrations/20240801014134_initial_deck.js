@@ -5,7 +5,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable("deck", function (table) {
     table.increments().primary().notNullable();
-    table.integer("user_id").references("id").inTable("user").onDelete("CASCADE");
+    table.integer("customer_id").references("id").inTable("customer").onDelete("CASCADE");
     table.string("title", 255).notNullable();
     table.timestamps(true, true);
   });

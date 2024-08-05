@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as userController from "./controllers/userController";
 import * as deckController from "./controllers/deckController";
-import * as flashcardController from "./controllers/flashcardController";
+import * as flashcardController from "./controllers/cardController";
 
 const router = Router();
 
