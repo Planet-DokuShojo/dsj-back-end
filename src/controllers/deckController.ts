@@ -64,7 +64,7 @@ export const deleteDeck = (req: Request, res: Response) => {
 // GET DECKS FROM USER_ID
 export const getByUserId = (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
-    knex<Deck>('deck').where({ user_id:id })
+    knex<Deck>('deck').where({ customer_id : id })
     .then(decks =>  {
         if(decks.length > 0) {
             res.json(decks);
