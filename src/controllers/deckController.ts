@@ -1,10 +1,7 @@
-import type {Knex}  from "knex";
 import type { Request, Response } from "express";
 import Deck from "../interfaces/Deck"
 
-const knex: Knex = require("../../knexfile");
-
-
+import knex from "../knex";
 
 //GET ALL
 export const getAllDecks = (req: Request, res: Response) => {

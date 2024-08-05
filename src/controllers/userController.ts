@@ -1,15 +1,14 @@
-
 import type { Request, Response } from "express";
 import User from "src/interfaces/User";
 
-const knex = require("../knex");
+import knex from "../knex";
 
 //GET ALL USERS
 export const getAllUsers = (req: Request, res: Response) => {
-  knex("user")
+  knex<User>("user")
     .select("*")
-    .then((allUsers:User[]) => res.json(allUsers))
-    .catch((error: Error) => res.status(500).json({ error: "error occurred" }));
+    .then((allUsers) => res.json(allUsers))
+    .catch((error) => res.status(500).json({ error: "error occurred" }));
 };
 
 //GET USERS BY ID

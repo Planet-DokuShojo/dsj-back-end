@@ -1,7 +1,6 @@
-import type { Knex } from "knex";
 import type { Request, Response } from "express";
 
-const knex: Knex = require("../../knexfile");
+import knex from "../knex";
 
 //GET ALL FLASHCARDS
 export const getAllFlashcards = (req: Request, res: Response) => {
