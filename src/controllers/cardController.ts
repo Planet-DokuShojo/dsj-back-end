@@ -31,7 +31,7 @@ export const createFlashcard = (req: Request, res: Response) => {
   knex("card")
     .insert(req.body)
     .returning("*")
-    .then((newFlashcard) => res.status(201).json(newFlashcard))
+    .then((newFlashcard) => res.status(201).json(newFlashcard[0]))
     .catch((error) =>
       res.status(500).json({ error: "error create new Flashcard" })
     );
@@ -77,9 +77,9 @@ export const deleteFlashcard = (req: Request, res: Response) => {
 
 //GET ALL CARDS FROM DECK_ID
 export const getByDeckId = (req: Request, res: Response) => {
-  const { id } = req.params;
+  const id = req.params.id
   knex("card")
-    .where({ id })
+    .where("deck_id", id)
     .then((flashCards) => {
       if (flashCards.length > 0) {
         res.json(flashCards);

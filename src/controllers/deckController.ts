@@ -27,15 +27,15 @@ export const getDeckById = (req: Request, res: Response) => {
 //CREATE NEW DECK
 export const createDeck = (req: Request, res: Response) => {
     knex<Deck>('deck').insert(req.body).returning('*')
-    .then(newDecks =>   res.status(201).json(newDecks))
+    .then(newDecks =>   res.status(201).json(newDecks[0]))
     .catch(error => res.status(500).json({error: 'error create new deck'}));
 }
 
 //UPDATE DECKS
 export const updateDeck = (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
-    const { title } = req.body;
-    knex<Deck>('deck').where({ id }).update({ title })
+    const title = req.body;
+    knex<Deck>('deck').where({ id }).update( title )
     .then(updatedDecks => {
         if(updatedDecks) {
             return knex('deck').where({ id:id }).first();
@@ -66,9 +66,12 @@ export const getByUserId = (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
     knex<Deck>('deck').where({ customer_id : id })
     .then(decks =>  {
-        if(decks.length > 0) {
+        if(decks.length > 1) {
             res.json(decks);
-        } else {
+        } else if (decks.length === 1) {
+            res.json(decks[0]);
+        }   
+        else {
             res.status(404).json({error:'No decks found for this user'});  
         }
     })
