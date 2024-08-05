@@ -1,11 +1,11 @@
 import type { Request, Response } from "express";
-import User from "src/interfaces/User";
+import Customer from "src/interfaces/Customer";
 
 import knex from "../knex";
 
 //GET ALL USERS
 export const getAllUsers = (req: Request, res: Response) => {
-  knex<User>("user")
+  knex<Customer>("customer")
     .select("*")
     .then((allUsers) => res.json(allUsers))
     .catch((error) => res.status(500).json({ error: "error occurred" }));
@@ -14,7 +14,7 @@ export const getAllUsers = (req: Request, res: Response) => {
 //GET USERS BY ID
 export const getUserById = (req: Request, res: Response) => {
   const { id } = req.params;
-  knex("user")
+  knex("customer")
     .where({ id })
     .first()
     .then((UserID) => {
@@ -29,7 +29,7 @@ export const getUserById = (req: Request, res: Response) => {
 
 //CREATE NEW USER
 export const createUser = (req: Request, res: Response) => {
-  knex("user")
+  knex("customer")
     .insert(req.body)
     .returning("*")
     .then((newUser) => res.status(201).json(newUser))
@@ -42,12 +42,12 @@ export const createUser = (req: Request, res: Response) => {
 export const updateUser = (req: Request, res: Response) => {
   const { id } = req.params;
   const { title } = req.body;
-  knex("user")
+  knex("customer")
     .where({ id })
     .update({ title })
     .then((updatedUser) => {
       if (updatedUser) {
-        return knex("user").where({ id }).first();
+        return knex("customer").where({ id }).first();
       } else {
         res.status(404).json({ error: "User not found" });
       }
@@ -59,7 +59,7 @@ export const updateUser = (req: Request, res: Response) => {
 //DELETE USER
 export const deleteUser = (req: Request, res: Response) => {
   const { id } = req.params;
-  knex("user")
+  knex("customer")
     .where({ id })
     .del()
     .then((deletedUser) => {
