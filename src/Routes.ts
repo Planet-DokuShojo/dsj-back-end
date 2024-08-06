@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as customerController from "./controllers/customerController";
-import * as deckController from "./controllers/deckController";
 import cardController from "./controllers/cardController";
+import deckController from "./controllers/deckController";
 
 const router = Router();
 
@@ -18,7 +18,7 @@ router.get("/decks/:id", deckController.getDeckById);
 router.post("/decks", deckController.createDeck);
 router.put("/decks/:id", deckController.updateDeck);
 router.delete("/decks/:id", deckController.deleteDeck);
-router.get("/decks/users/:id", deckController.getByUserId);
+router.get("/decks/customers/:id", deckController.getByUserId);
 
 // Flashcard routes
 router.get("/cards", cardController.getAllCards);

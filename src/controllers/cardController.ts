@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import cardsModel from "../models/cards.model";
-import Card from "src/interfaces/Card";
 
 const cardController = {
 
@@ -40,7 +39,7 @@ const cardController = {
       card.updated_at = new Date().toISOString();
       const results = await cardsModel.update(id, card);
       res.status(200);
-      res.json(results);
+      res.json(results[0]);
     }catch {
       res.status(500);
     }
