@@ -1,8 +1,7 @@
 import { Router } from "express";
-import * as customerController from "./controllers/customerController";
-import * as deckController from "./controllers/deckController";
-import * as flashcardController from "./controllers/cardController";
-
+import cardController from "./controllers/cardController";
+import deckController from "./controllers/deckController";
+import customerController from "./controllers/customerController";
 const router = Router();
 
 // User routes
@@ -18,14 +17,14 @@ router.get("/decks/:id", deckController.getDeckById);
 router.post("/decks", deckController.createDeck);
 router.put("/decks/:id", deckController.updateDeck);
 router.delete("/decks/:id", deckController.deleteDeck);
-router.get("/decks/users/:id", deckController.getByUserId);
+router.get("/decks/customers/:id", deckController.getByUserId);
 
 // Flashcard routes
-router.get("/flashcards", flashcardController.getAllFlashcards);
-router.get("/flashcards/:id", flashcardController.getFlashcardById);
-router.post("/flashcards", flashcardController.createFlashcard);
-router.put("/flashcards/:id", flashcardController.updateFlashcard);
-router.delete("/flashcards/:id", flashcardController.deleteFlashcard);
-router.get("/flashcards/decks/:id", flashcardController.getByDeckId);
+router.get("/cards", cardController.getAllCards);
+router.get("/cards/:id", cardController.getById);
+router.post("/cards", cardController.create);
+router.put("/cards/:id", cardController.update);
+router.delete("/cards/:id", cardController.delete);
+router.get("/cards/decks/:id", cardController.getByDeckId);
 
 export default router;
