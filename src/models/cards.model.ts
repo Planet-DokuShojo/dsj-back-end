@@ -13,7 +13,7 @@ const cardsModel = {
         return knex('card').insert(card).returning("*");
     },
     update: async(id: number, card: Card) => {
-        return knex('card').update(card).where({id});
+        return knex('card').update(card).where({id}).returning('*');
     },
     delete: async(id: number) => {
         return knex('card').where({id}).del();
