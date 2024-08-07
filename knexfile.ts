@@ -1,7 +1,7 @@
 import { Knex } from "knex";
 import dotEnv from "dotenv";
 
-dotEnv.config({ path: "./.env.local" });
+dotEnv.config({ path: "./.env" });
 
 const DB_USER = process.env.DB_USER;
 const DB_NAME = process.env.DB_NAME;
