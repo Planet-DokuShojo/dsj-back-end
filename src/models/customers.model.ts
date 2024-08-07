@@ -5,6 +5,9 @@ const customersModel = {
     select: async() => {
         return knex('customer').select('*');
     },
+    selectEmails: async() => {
+        return knex('customer').select('email_address');
+    },
     selectById: async(id:number) => {
         return knex('customer').where({id}).first();
     },

@@ -6,6 +6,7 @@ const router = Router();
 
 // User routes
 router.get("/", customerController.getAllUsers);
+router.get("/emails", customerController.getAllEmails);
 router.get("/customers/:id", customerController.getUserById);
 router.post("/customers", customerController.createUser);
 router.put("/customers/:id", customerController.updateUser);

@@ -12,6 +12,15 @@ const customerController = {
       res.status(500);
     }
   },
+  getAllEmails: async(req:Request, res:Response) => {
+    try{
+      const result = await customersModel.selectEmails();
+      res.status(200);
+      res.json(result);
+    }catch {
+      res.status(500);
+    }
+  },
   getUserById: async(req:Request, res:Response) => {
     try{
       const id = Number(req.params.id);
